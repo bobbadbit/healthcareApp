@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "224285273196",
+    "firebase_url": "https://game-of-life-5ec31-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "game-of-life-5ec31",
+    "storage_bucket": "game-of-life-5ec31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224285273196:android:71f127e6cbadac95eafc49",
+        "android_client_info": {
+          "package_name": "com.example.air_quality_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224285273196-i3i6vq0n0bd6nb7v6g0hprdmk407oemk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrgJ0eGwJzPlRHC21wQSY67ASJjq9XyFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224285273196-i3i6vq0n0bd6nb7v6g0hprdmk407oemk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224285273196:android:641f2c762611a708eafc49",
+        "android_client_info": {
+          "package_name": "com.example.game_of_life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224285273196-i3i6vq0n0bd6nb7v6g0hprdmk407oemk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrgJ0eGwJzPlRHC21wQSY67ASJjq9XyFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224285273196-i3i6vq0n0bd6nb7v6g0hprdmk407oemk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
