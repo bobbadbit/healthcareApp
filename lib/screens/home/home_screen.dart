@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                'Prediction',
+                'Infomation',
                 style: theme.headline5?.apply(
                     fontWeightDelta: -2,
                     fontSizeFactor: 1.2,

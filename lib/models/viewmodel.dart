@@ -7,5 +7,7 @@ class DataViewModel extends ChangeNotifier {
   onChanged(double value) {  
     print('onChanged: $value');
     tempNotifier.value = value;
+    // post data to api 
   }
+
 }

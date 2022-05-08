@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:air_quality_application/utils/styleguides/colors.dart';
 import 'package:provider/provider.dart';
 
 class BluetoothApp extends StatefulWidget {
@@ -138,15 +138,21 @@ class _BluetoothAppState extends State<BluetoothApp> {
     });
   }
 
-  // Now, its time to build the UI
+  //build the UI
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return SafeArea(
+      child: Scaffold(      
         key: _scaffoldKey,
         appBar: AppBar(
+          // tim tu stackoverflow
+           flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [darkBlueGradientColor, lightBlueGradientColor])),
+           ),
           title: Text("Flutter Bluetooth"),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.deepPurple,        
           actions: <Widget>[
             FlatButton.icon(
               icon: Icon(
@@ -348,7 +354,7 @@ class _BluetoothAppState extends State<BluetoothApp> {
         MaterialPageRoute(builder: (context) => 
           MyBottomNavigationBar(viewmodel: viewmodel,)),
           );
-        //print('hereee');
+        //navigate den MyBottomNavigationBar!;
     } 
     catch (ex) {
       _collectingTask?.cancel();
@@ -362,7 +368,7 @@ class _BluetoothAppState extends State<BluetoothApp> {
               new TextButton(
                 child: new Text("Close"),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();//Navigate o day!
                 },
               ),
             ],

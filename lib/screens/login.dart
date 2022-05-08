@@ -3,7 +3,7 @@ import 'package:air_quality_application/service/HttpService.dart';
 import 'package:air_quality_application/utils/widget_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:air_quality_application/utils/styleguides/colors.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -69,20 +69,53 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final loginButton = new RaisedButton(
-      child: const Text('Sign In'),
-      textColor: Colors.white,
-      color: Theme.of(context).accentColor,
-      elevation: 10.0,
-      splashColor: Colors.blueGrey,
-      onPressed: () {
-        String username = usernameController.text;
-        String word = passwordController.text;
-        login(context, username, word);
-        // Perform some action
-      },
-    );
-
+    // final loginButton = new RaisedButton(
+    //   textColor: Colors.white,
+    //   color: whiteColor,
+    //   child: Container(
+    //           alignment: Alignment.center,
+    //           width: double.infinity,
+    //           height: 50,
+    //           decoration: BoxDecoration(               
+    //             gradient: LinearGradient(
+    //                 colors: [darkBlueGradientColor, lightBlueGradientColor])
+    //             ),
+    //             child: const Text('Sign In'),
+    //           ),
+    //   //splashColor: Colors.blueGrey,
+              
+    //   onPressed: () {
+    //     String username = usernameController.text;
+    //     String word = passwordController.text;
+    //     login(context, username, word);
+    //     // Perform some action
+    //   },
+    // );
+  final loginButton = ButtonTheme(
+  buttonColor: whiteColor,
+  //minWidth: 700.0,
+  //height: 50.0,
+  child: RaisedButton(
+    textColor: Colors.white,
+    child: Container(
+      
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: 50,
+      decoration: BoxDecoration(
+                gradient: LinearGradient(
+                   colors: [darkBlueGradientColor, lightBlueGradientColor])
+                  ,
+                ),          
+    child: Text("Sign In")
+  ),
+  onPressed: () {
+      String username = usernameController.text;
+      String word = passwordController.text;
+      login(context, username, word);
+    },
+  ),
+);
     // final forgotLabel = FlatButton(
     //   child: Text(
     //     'Forgot password?',
@@ -103,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
             email,
             SizedBox(height: 10.0),
             password,
-            SizedBox(height: 15.0),
+            SizedBox(height: 30.0),
             loginButton,
             //forgotLabel
           ],
