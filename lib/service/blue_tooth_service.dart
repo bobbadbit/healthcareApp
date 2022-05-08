@@ -31,32 +31,27 @@ class BackgroundCollectingTask with ChangeNotifier{
 
   bool inProgress = false;
   BackgroundCollectingTask._fromConnection(this._connection, DataViewModel viewModel) {
-    print('previous ${viewModel.hashCode}');
     _connection.input!.listen((data) {
       _buffer += data;
-      print('listen: ');
-      print(Isolate.current.debugName);
+      print('listen: ${Isolate.current.debugName}');
       while (true) {
         // If there is a sample, and it is full sent
-        // int index = _buffer.indexOf('t'.codeUnitAt(0));
         int index = 0;
+        print('index: $index');
         if (index >= 0 && data.length - index >= 7) {
-          final DataSample sample = DataSample(
-              temperature1: (data[index + 1] + data[index + 2] / 100));
-              var str = '';
-          for (var i in data){
-            
+          // final DataSample sample = DataSample(
+          //     temperature1: (data[index + 1] + data[index + 2] / 100));
+          var str = '';
+          for (var i in data){           
             str += String.fromCharCode(i);
           }
-          print(str);
-          //print('here');
-          //print(samples);
-          samples.add(sample);
-          //5s chuyen du lieu vao viewModel
-          
-          sleep(const Duration(seconds: 5));
-            viewModel.onChanged(double.parse(str));
-            notifyListeners();                  
+          // print(str);
+          // samples.add(sample);
+          viewModel.onChanged(double.parse(str));
+          notifyListeners();                  
+          break;
+            // var arduinoTemp = double.parse(str);
+            // viewModel.onChanged(double.parse(str));
           // Note: It shouldn't be invoked very often - in this example data comes at every second, but if there would be more data, it should update (including repaint of graphs) in some fixed interval instead of after every sample.
           //print("${sample.timestamp.toString()} -> ${sample.temperature1} / ${sample.temperature2}");
         }

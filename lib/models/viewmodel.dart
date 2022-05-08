@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 class DataViewModel extends ChangeNotifier {
   double temp = 40.0;
   ValueNotifier<double> tempNotifier = ValueNotifier(40.00);
-  onChanged(double value) {
+  onChanged(double value) {  
+    print('onChanged: $value');
     tempNotifier.value = value;
-    print(value);
   }
 }

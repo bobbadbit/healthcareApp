@@ -49,9 +49,9 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Montserrat'
         ),
         home: 
-        //BluetoothApp() 
+        BluetoothApp() 
         //MyBottomNavigationBar()
-        LoginPage()
+        // LoginPage()
         , 
       ),
     );

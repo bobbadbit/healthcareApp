@@ -44,14 +44,14 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           addVerticalSpace(15),
-                 ValueListenableBuilder<double>(
-                   
+                 ValueListenableBuilder<double>(                  
                    valueListenable: viewModel.tempNotifier,
-                   builder: (context, data, _) {
-                     print('viewmodel changed');
-                     print('homescreen: ');
-                     print(Isolate.current.debugName);
-                     return _DetailList(temperature: data);
+                   builder: (BuildContext context,double data, _) {
+                     //print('viewmodel changed');
+                     //print('homescreen: ');
+                     //print(Isolate.current.debugName);
+                     print('value listenable builder: $data');
+                     return _DetailList( temperature: data);
                    },
                  ),
         ],
