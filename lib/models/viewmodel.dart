@@ -9,5 +9,4 @@ class DataViewModel extends ChangeNotifier {
     tempNotifier.value = value;
     // post data to api 
   }
-
 }

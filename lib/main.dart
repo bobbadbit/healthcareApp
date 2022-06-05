@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:air_quality_application/components/my_bottom_navigation.dart';
 import 'package:air_quality_application/screens/bluetooth.dart';
 import 'package:air_quality_application/screens/bluetooth_serial.dart';
+import 'package:air_quality_application/screens/history/history_screen.dart';
 import 'package:air_quality_application/screens/login.dart';
 import 'package:air_quality_application/service/HttpService.dart';
 import 'package:air_quality_application/service/blue_tooth_service.dart';
@@ -15,7 +16,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/gen/flutterblue.pb.dart';
 import 'package:provider/provider.dart';
 import 'package:air_quality_application/screens/login.dart';
+ class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
   await Firebase.initializeApp();
@@ -26,6 +35,7 @@ void main() async {
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -51,10 +61,11 @@ class MyApp extends StatelessWidget {
         home: 
         //BluetoothApp() 
         //MyBottomNavigationBar()
-         LoginPage()
+        LoginPage()
+        //HistoryScreen()
         , 
       ),
     );
   }
 }
-//12h19p
+//12h19p/

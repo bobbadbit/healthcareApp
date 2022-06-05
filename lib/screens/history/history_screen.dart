@@ -51,43 +51,50 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           addVerticalSpace(15),
           //build chart
-          StreamBuilder(
-            stream: httpService.fetchListData(),
+          FutureBuilder<Data1>(
+            future: httpService.fetchData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                Event event = snapshot.data as Event;
-                final dataMap = parseDynamicToMap(event.snapshot.value);
-                List<Data> list = [];
-                for(var key in dataMap.keys) {
-                  Data data = Data.fromJson(dataMap[key]);
-                  list.add(data);
-                }
-                seriesList.clear();
-                seriesList.add(charts.Series(
-                  id: 'aqi',
-                  data: list,
-                  domainFn: (Data newData, _) => newData.time ?? DateTime(300),
-                  measureFn: (Data newData, _) => newData.aqi,
-                  colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-                ));
-                // Future.delayed(Duration.zero, () async {
-                //   setState(() {
-                //
-                //   });
-                // });
-                return Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  width: size.width,
-                  height: size.height * 6 / 9,
-                  child: charts.TimeSeriesChart(
-                    seriesList,
-                    animate: true,
-                    defaultRenderer:
-                        charts.LineRendererConfig(includePoints: true),
-                    dateTimeFactory: const charts.LocalDateTimeFactory(),
-                  ),
-                );
+                print(snapshot.data!.Category);
+                return Text(snapshot.data!.Category);
+                // Event event = snapshot.data as Event;
+                // final dataMap = parseDynamicToMap(event.snapshot.value);
+                // List<Data> list = [];
+                // for(var key in dataMap.keys) {
+                //   Data data = Data.fromJson(dataMap[key]);
+                //   list.add(data);
+                // }
+                // seriesList.clear();
+                // seriesList.add(charts.Series(
+                //   id: 'aqi',
+                //   data: list,
+                //   domainFn: (Data newData, _) => newData.time ?? DateTime(300),
+                //   measureFn: (Data newData, _) => newData.aqi,
+                //   colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                // ));
+                // // Future.delayed(Duration.zero, () async {
+                // //   setState(() {
+                // //
+                // //   });
+                // // });
+                // return Container(
+                //   padding:
+                //       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                //   width: size.width,
+                //   height: size.height * 6 / 9,
+                //   child: charts.TimeSeriesChart(
+                //     seriesList,
+                //     animate: true,
+                //     defaultRenderer:
+                //         charts.LineRendererConfig(includePoints: true),
+                //     dateTimeFactory: const charts.LocalDateTimeFactory(),
+                //   ),
+                // );
+              }
+              else if (snapshot.hasError)
+              {
+                print(snapshot.error);
+                return Text('${snapshot.error}');
               }
               return CircularProgressIndicator();
             },

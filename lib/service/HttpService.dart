@@ -1,11 +1,42 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:air_quality_application/models/Data.dart';
 import 'package:air_quality_application/models/Predict.dart';
 import 'package:air_quality_application/models/Recommend.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+class Data1 {
+    final String API;
+    final String Description;
+    final String Auth;
+    final bool HTTPS;
+    final String Cors;
+    final String Link;
+    final String Category; 
+  const Data1({
+    required this.API,
+    required this.Description,
+    required this.Auth,
+    required this.HTTPS,
+    required this.Cors,
+    required this.Link,
+    required this.Category,
+  });
+  factory Data1.fromJson(Map<String, dynamic> json) {
+    return Data1(
+      API: json['API'],
+      Description: json['Description'],
+      Auth: json['Auth'],
+      HTTPS: json['HTTPS'],
+      Cors: json['Cors'],
+      Link: json['Link'],
+      Category: json['Category'],
+    );
+  }
+}
 class HttpService {
   final database = FirebaseDatabase(
           databaseURL:
@@ -25,16 +56,19 @@ class HttpService {
     return recommendRef.onValue;
   }
 
-  Stream<Event> fetchData() {
-    // final response = await http.get(
-    //     Uri.https('microcontrollers-assign.herokuapp.com', 'api/data/latest'));
-    // if (response.statusCode == 200) {
-    //   return Data.fromJson(jsonDecode(response.body));
-    // } else {
-    //   return Data();
-    // }
-    final dataRef = database.child('data');
-    return dataRef.orderByKey().limitToLast(1).onValue;
+ 
+
+  Future<Data1> fetchData() async{
+    final response = await http.get(
+        Uri.parse('https://api.publicapis.org/entries'));
+    if (response.statusCode == 200) {
+      return Data1.fromJson(jsonDecode(response.body[0]));
+    } else {
+      return Data1(API: 'API', Description: 'Description', Auth: 'Auth', HTTPS: false, Cors: 'Cors', Link: 'Link', Category: 'Category');
+    }
+    // final dataRef = database.child('data');
+    // return dataRef.orderByKey().limitToLast(1).onValue;
+    //http.post(url)
   }
 
   Stream<Event> fetchPredict() {
