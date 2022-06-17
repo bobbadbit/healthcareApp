@@ -87,23 +87,20 @@ Future<UserLogin> login(String username, String password) async {
     }//else response.statusCode == 404
     return throw Exception('Failed to Login');
   }
-  
-  Future<Temparature> sendData(int patient_id,double temp) async{
-      final response = await http.post(Uri.parse("http://192.168.2.49:8000/Patient/${patient_id}/${temp}"),
-        body: {
-            "temp": temp.toString()
+  // toi nay can sua post data
+  Future<Temparature> sendData(double temp) async{
+      final response = await http.post(Uri.http('healthcaresystemu.herokuapp.com','api/patients/62aa2188f4505390a386e6e3'),
+      headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, double> {
+            "temp": temp
         }
-    );
-    // final String apiURL ="http://192.168.2.49:8000/Patient/${patient_id}/${temp}";
-    // final response = await http.post(apiURL, body: {
-    //   "temp": temp
-    // });
-  if(response.statusCode == 200){
-    final String responseString = response.body;
-    return temparatureFromJson(response.body);
+    ));
+    print(response.statusCode);
+  if(response.statusCode == 201){
+    return Temparature.fromJson(jsonDecode(response.body));
   }else{
     // return Temparature(temp: temp, id: id, ownerId: ownerId, dateCreated: dateCreated, dateLastUpdated: dateLastUpdated);
-    throw Exception("Fail");
+    throw Exception("Fail to upload temparature!");
   }
   }
   Future<Users> getData() async{

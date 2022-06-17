@@ -10,6 +10,7 @@ class DataViewModel extends ChangeNotifier {
     print('onChanged: $value');
     tempNotifier.value = value;
     //HttpService().sendData(0, value);
+    HttpService().sendData(value);
     print("hereee");
     //final Temparature NhietDo = HttpService().sendData(1, value);
     // post data to api 
