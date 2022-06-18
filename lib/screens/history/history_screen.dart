@@ -1,4 +1,5 @@
 import 'package:air_quality_application/models/Data.dart';
+import 'package:air_quality_application/models/Users.dart';
 import 'package:air_quality_application/service/HttpService.dart';
 import 'package:air_quality_application/utils/string_utils.dart';
 import 'package:air_quality_application/utils/styleguides/colors.dart';
@@ -15,8 +16,8 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  List<charts.Series<Data, DateTime>> seriesList =
-      <charts.Series<Data, DateTime>>[];
+  List<charts.Series<Users, DateTime>> seriesList =
+      <charts.Series<Users, DateTime>>[];
 
   @override
   void initState() {
@@ -55,26 +56,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
             stream: httpService.fetchListData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                Event event = snapshot.data as Event;
-                final dataMap = parseDynamicToMap(event.snapshot.value);
-                List<Data> list = [];
-                for(var key in dataMap.keys) {
-                  Data data = Data.fromJson(dataMap[key]);
-                  list.add(data);
+                if (snapshot.data == null) {
+                  return Container();
                 }
+                List<Users> list = snapshot.data as List<Users>;
+                
+                // final dataMap = parseDynamicToMap(event);
+                // List<Users> list = [];
+                // for(var key in dataMap.keys) {
+                //   Users users = Users.fromJson(dataMap[key]);
+                //   list.add(users);
+                // }
                 seriesList.clear();
                 seriesList.add(charts.Series(
                   id: 'aqi',
                   data: list,
-                  domainFn: (Data newData, _) => newData.time ?? DateTime(300),
-                  measureFn: (Data newData, _) => newData.aqi,
+                  domainFn: (Users users, _) => users.createdAt,
+                  measureFn: (Users users, _) => users.temp,
                   colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
                 ));
-                // Future.delayed(Duration.zero, () async {
-                //   setState(() {
-                //
-                //   });
-                // });
+
                 return Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

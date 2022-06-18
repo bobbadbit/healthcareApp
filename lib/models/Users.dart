@@ -10,28 +10,36 @@ String usersToJson(List<Users> data) => json.encode(List<dynamic>.from(data.map(
 
 class Users {
     Users({
-        required this.email,
         required this.id,
-        required this.isActive,
-        required this.patients,
+        required this.temp,
+        required this.ownerId,
+        required this.createdAt,
+        required this.updatedAt,
+        required this.v,
     });
 
-    String email;
-    int id;
-    bool isActive;
-    List<dynamic> patients;
+    String id;
+    int temp;
+    String ownerId;
+    DateTime createdAt;
+    DateTime updatedAt;
+    int v;
 
     factory Users.fromJson(Map<String, dynamic> json) => Users(
-        email: json["email"],
-        id: json["id"],
-        isActive: json["is_active"],
-        patients: List<dynamic>.from(json["patients"].map((x) => x)),
+        id: json["_id"],
+        temp: json["temp"],
+        ownerId: json["owner_id"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
-        "email": email,
-        "id": id,
-        "is_active": isActive,
-        "patients": List<dynamic>.from(patients.map((x) => x)),
+        "_id": id,
+        "temp": temp,
+        "owner_id": ownerId,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
     };
 }

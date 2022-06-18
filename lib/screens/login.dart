@@ -27,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
     }
     else showToast(context, 'Login failed');
   }
-
   void moveToHome(BuildContext context) {
             Navigator.push(
         context,
@@ -69,28 +68,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    // final loginButton = new RaisedButton(
-    //   textColor: Colors.white,
-    //   color: whiteColor,
-    //   child: Container(
-    //           alignment: Alignment.center,
-    //           width: double.infinity,
-    //           height: 50,
-    //           decoration: BoxDecoration(               
-    //             gradient: LinearGradient(
-    //                 colors: [darkBlueGradientColor, lightBlueGradientColor])
-    //             ),
-    //             child: const Text('Sign In'),
-    //           ),
-    //   //splashColor: Colors.blueGrey,
-              
-    //   onPressed: () {
-    //     String username = usernameController.text;
-    //     String word = passwordController.text;
-    //     login(context, username, word);
-    //     // Perform some action
-    //   },
-    // );
   final loginButton = ButtonTheme(
   buttonColor: whiteColor,
   //minWidth: 700.0,

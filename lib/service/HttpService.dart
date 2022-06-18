@@ -54,17 +54,20 @@ class HttpService {
   return predictRef.onValue;
   }
 
-  Stream<Event> fetchListData() {
-    // final response = await http
-    //     .get(Uri.https('microcontrollers-assign.herokuapp.com', 'api/data'));
-    // List<Data> list = [];
-    // if (response.statusCode == 200) {
-    //   Iterable l = json.decode(response.body);
-    //   list = List<Data>.from(l.map((e) => Data.fromJson(e)));
-    // }
-    // return list;
-    final dataRef = database.child('data');
-    return dataRef.orderByKey().onValue;
+  Stream<List<Users>> fetchListData() async* {
+    final response = await http
+        .get(Uri.https('healthcaresystemu.herokuapp.com', 'api/patients/62aa2188f4505390a386e6e3'));
+    List<Users> list = [];
+    // print("Status code of get:");
+    // print(response.statusCode);
+    if (response.statusCode == 200) {
+      Iterable l = json.decode(response.body);
+      list = List<Users>.from(l.map((e) => Users.fromJson(e)));
+    }
+    print(list);
+    yield list;
+    // final dataRef = database.child('data');
+    // return dataRef.orderByKey().onValue;
   }
   //ham verified username and password
 Future<UserLogin> login(String username, String password) async {
@@ -78,7 +81,7 @@ Future<UserLogin> login(String username, String password) async {
         "password" : password
       }
     ));
-
+     print('status code of LOGIN:');
     print(response.statusCode);
     //print(response.body);
     if (response.statusCode == 200) {
@@ -87,7 +90,7 @@ Future<UserLogin> login(String username, String password) async {
     }//else response.statusCode == 404
     return throw Exception('Failed to Login');
   }
-  // toi nay can sua post data
+  //ham post data vao database mongo
   Future<Temparature> sendData(double temp) async{
       final response = await http.post(Uri.http('healthcaresystemu.herokuapp.com','api/patients/62aa2188f4505390a386e6e3'),
       headers: {"Content-Type": "application/json"},
@@ -95,6 +98,7 @@ Future<UserLogin> login(String username, String password) async {
             "temp": temp
         }
     ));
+     print('status code of POST:');
     print(response.statusCode);
   if(response.statusCode == 201){
     return Temparature.fromJson(jsonDecode(response.body));
@@ -103,12 +107,16 @@ Future<UserLogin> login(String username, String password) async {
     throw Exception("Fail to upload temparature!");
   }
   }
-  Future<Users> getData() async{
-    final response = await http.get(Uri.https('172.15.74.141:8000','users/1'));
-    if(response.statusCode == 200){
-      return Users.fromJson(jsonDecode(response.body));
-    }else{
-      throw Exception("Fail to load User");
-    }
-  }
-}
+  //ham get data de ve bieu do:
+//   Future<Users> getData() async{
+//     final response = await http.get(Uri.https('healthcaresystemu.herokuapp.com','api/patients/62aa2188f4505390a386e6e3'));
+//     print('status code of GET:');
+//     print(response.statusCode);
+//     print(response.body);
+//     if(response.statusCode == 200){
+//       return Users.fromJson(jsonDecode(response.body));
+//     }else{
+//       throw Exception("Fail to load Users");
+//     }
+//   }
+ }
