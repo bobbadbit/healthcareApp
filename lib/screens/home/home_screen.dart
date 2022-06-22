@@ -50,7 +50,10 @@ class HomeScreen extends StatelessWidget {
                      //print('viewmodel changed');
                      //print('homescreen: ');
                      //print(Isolate.current.debugName);
-                     print('value listenable builder: $data');
+                     //print('value listenable builder: $data');
+                     if (data >= 40){
+                      
+                     }
                      return _DetailList( temperature: data);
                    },
                  ),
@@ -160,7 +163,8 @@ class _DetailList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16),
-      color: Colors.white,
+      color: temperature >= 27 ? Colors.red:
+       Colors.white,
       child: Table(
         children: [
           TableRow(
@@ -215,7 +219,8 @@ class _DetailList extends StatelessWidget {
                 icon: Icon(
                   Icons.whatshot,
                   size: 25,
-                  color: lightBlueGradientColor,
+                  color: temperature>27? Colors.red : 
+                  lightBlueGradientColor,
                 ),
               ),
               InfoBigCard(

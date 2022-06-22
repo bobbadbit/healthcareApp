@@ -24,7 +24,6 @@ class HttpService {
 
   var dateCreated;
 
-
   Stream<Event> fetchRecommend() {
     // final response = await http.get(Uri.https(
     //     'microcontrollers-assign.herokuapp.com', 'api/data/recommend'));
@@ -53,16 +52,21 @@ class HttpService {
   final predictRef = database.child('prediction');
   return predictRef.onValue;
   }
-
+//get data va ve bieu do
   Stream<List<Users>> fetchListData() async* {
     final response = await http
         .get(Uri.https('healthcaresystemu.herokuapp.com', 'api/patients/62aa2188f4505390a386e6e3'));
     List<Users> list = [];
-    // print("Status code of get:");
-    // print(response.statusCode);
+    print("Status code of get:");
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
+
       Iterable l = json.decode(response.body);
+
       list = List<Users>.from(l.map((e) => Users.fromJson(e)));
+      print("trong vong if:");
+      print(response.body);
     }
     print(list);
     yield list;

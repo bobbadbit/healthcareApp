@@ -55,6 +55,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
           StreamBuilder(
             stream: httpService.fetchListData(),
             builder: (context, snapshot) {
+              print("snapshot:");
+              print(snapshot.data);
               if (snapshot.hasData) {
                 if (snapshot.data == null) {
                   return Container();
